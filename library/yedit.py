@@ -434,6 +434,7 @@ class Yedit(object):
                 os.close(dfd)
 
     def write(self):
+        yaml = YAML(typ="safe", pure=True)
         ''' write to file '''
         if not self.filename:
             raise YeditException('Please specify a filename.')
@@ -483,6 +484,7 @@ class Yedit(object):
     def load(self, content_type='yaml'):
         ''' return yaml file '''
         contents = self.read()
+        yaml = YAML(typ="safe", pure=True)
 
         if not contents and not self.content:
             return None
@@ -507,7 +509,7 @@ class Yedit(object):
                 try:
                     self.yaml_dict = yaml.load(contents, yaml.RoundTripLoader)
                 except AttributeError:
-                    self.yaml_dict = yaml.safe_load(contents, pure=True)
+                    self.yaml_dict = yaml.safe_load(contents)
 
                 # Try to set format attributes if supported
                 try:
@@ -691,6 +693,7 @@ class Yedit(object):
         return (False, self.yaml_dict)
 
     def put(self, path, value):
+        yaml = YAML(typ="safe", pure=True)
         ''' put path, value into a dict '''
         try:
             entry = Yedit.get_entry(self.yaml_dict, path, self.separator)
@@ -734,6 +737,7 @@ class Yedit(object):
         return (True, self.yaml_dict)
 
     def create(self, path, value):
+        yaml = YAML(typ="safe", pure=True)
         ''' create a yaml file '''
         if not self.file_exists():
             # deepcopy didn't work
@@ -760,6 +764,7 @@ class Yedit(object):
 
     @staticmethod
     def get_curr_value(invalue, val_type):
+        yaml = YAML(typ="safe", pure=True)
         '''return the current value'''
         if invalue is None:
             return None
@@ -774,6 +779,7 @@ class Yedit(object):
 
     @staticmethod
     def parse_value(inc_value, vtype=''):
+        yaml = YAML(typ="safe", pure=True)
         '''determine value type passed'''
         true_bools = ['y', 'Y', 'yes', 'Yes', 'YES', 'true', 'True', 'TRUE',
                       'on', 'On', 'ON', ]
