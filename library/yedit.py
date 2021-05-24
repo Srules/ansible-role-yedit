@@ -194,11 +194,7 @@ import re  # noqa: F401
 import shutil  # noqa: F401
 import time  # noqa: F401
 
-try:
-    import ruamel.yaml as YAML  # noqa: F401
-except ImportError:
-    import yaml  # noqa: F401
-
+from ruamel.yaml import YAML
 from ansible.module_utils.basic import AnsibleModule
 
 
