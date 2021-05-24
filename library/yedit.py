@@ -507,7 +507,7 @@ class Yedit(object):
                 try:
                     self.yaml_dict = yaml.load(contents, yaml.RoundTripLoader)
                 except AttributeError:
-                    self.yaml_dict = yaml.safe_load(contents)
+                    self.yaml_dict = yaml.safe_load(contents, pure=True)
 
                 # Try to set format attributes if supported
                 try:
@@ -794,7 +794,7 @@ class Yedit(object):
         # If vtype is not str then go ahead and attempt to yaml load it.
         elif isinstance(inc_value, str) and 'str' not in vtype:
             try:
-                inc_value = yaml.safe_load(inc_value)
+                inc_value = yaml.safe_load(inc_value, pure=True)
             except Exception:
                 raise YeditException('Could not determine type of incoming value. ' +
                                      'value=[{0}] vtype=[{1}]'.format(type(inc_value), vtype))
