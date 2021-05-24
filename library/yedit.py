@@ -195,7 +195,7 @@ import shutil  # noqa: F401
 import time  # noqa: F401
 
 try:
-    import ruamel.yaml as yaml  # noqa: F401
+    import ruamel.yaml as YAML  # noqa: F401
 except ImportError:
     import yaml  # noqa: F401
 
